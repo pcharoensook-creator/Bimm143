@@ -1,0 +1,77 @@
+---
+title: "Class 12"
+author: "Parisa Charoensook A17939591"
+format: pdf
+editor: visual
+toc: true
+---
+
+## Identify Genetic Variants of Interest
+
+> Q1: What are those 4 candidate SNPs?
+
+The four candidate SNPs are rs12936231, rs8067378, rs9303277, and rs7216389
+> Q2. What three genes do these variants overlap or effet?
+
+The three genes that these variants overalp and affect aew PBP2, GSDMB, ORMDL3.
+
+> Q3: What is the location of rs8067378 and what are the different alleles for rs8067378?
+
+rs8067378 is located on chromosome 17:39895095, and has the alleles A and G. 
+> Q4: Name at least 3 downstream genes for rs8067378? 
+
+Three downstream genes are GSDMB, ORMDL3, and IKZF3. 
+
+
+> Q5. What proportion of the Mexican Ancestry in Los Angeles sample population (MXL) are
+homozygous for the asthma associated SNP (G|G)? 
+
+```{r}
+geno <- read.csv ("table.csv")
+
+head(geno)
+
+table(geno$Genotype)
+```
+
+```{r}
+counts <- table(geno$Genotype)
+counts["G|G"] / sum(counts)
+```
+
+The proportion of the MXL population that is homozygous for asthma-associated SNP is 9/64 or ~14.1%. 
+
+> Q6. Back on the ENSEMBLE page, use the “search for a sample” field above to find the particular sample HG00109. This is a male from the GBR population group. What is the genotype for this sample?
+
+The genotype sample HG00109 is G|G. 
+
+## Section 2: Intial RNA - Seq analysis 
+
+> Q7: How many sequences are there in the first file? What is the file size and format of the data? Make sure the format is fastqsanger here!
+
+The first file has 3863 sequences. The file size is 757 KB and its format is fastqsanger. 
+
+> Q8: What is the GC content and sequence length of the second fastq file?
+
+The GC content is 54% and the sequence length is 50-75 bp on the second fastq file. 
+
+> Q9: How about per base sequence quality? Does any base have a mean quality score below 20?
+
+The per base sequence qualtiy score remains above 20 throughout the reads, no bases have a mean quality score below 20. 
+## Section 3: Mapping RNA - Seq reads to genome. 
+
+> Q10: Where are most the accepted hits located?
+
+The most accepted hits are located on chromosome 17 around chr17:38007296–38170000. 
+
+> Q11: Following Q10, is there any interesting gene around that area?
+
+Genes like EZH1, CNTNAP1, and CCR10. 
+
+> Q12: Cufflinks again produces multiple output files that you can inspect from your right-handside galaxy history. From the “gene expression” output, what is the FPKM for the ORMDL3 gene? What are the other genes with above zero FPKM values?
+
+The FPKM value for the ORMDL3 gene was 0. Based on gene expression output, no other genes showed above zero FPKM values either. 
+
+
+
+

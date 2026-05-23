@@ -1,0 +1,36 @@
+---
+title: "Class 12 Pt2."
+author: "Parisa Charoensook A17939591"
+format: pdf
+editor: visual
+---
+
+> Q13: Read this file into R and determine the sample size for each genotype and their corresponding median expression levels for each of these genotypes. 
+
+The sample sizes for each genotype are 
+A/A = 108, A/G = 233, and G/G = 121. The median expression levels were A/A = 31.25, A/G = 25.06, G/G = 20.07. 
+
+
+```{r}
+geno <- read.table("expression.txt" ,
+header = TRUE) 
+``` 
+
+```{r}
+table(geno$geno)
+
+tapply(geno$exp, geno$geno, median)
+```
+
+> Q14. Generate a boxplot with a box per genotype, what could you infer from the relative expression value between A/A and G/G displayed in this plot? Does the SNP effect the expression of ORMDL3? 
+
+The boxplot shows that ORMDL3 expression decreases from A/A to A/G to G/G. Individuals with A/A genotype have highes expressions and G/G has least. This sugggests that the SNP is associated with changes in ORMDL3 expression and has an affect on gene expression. 
+
+```{r}
+boxplot(exp ~ geno, data=geno,
+        main = "ORMDL3 Expression by Genotype",
+        xlab = "Genotype",
+        ylab = "Expression")
+```
+
+

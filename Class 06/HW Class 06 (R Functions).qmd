@@ -1,0 +1,73 @@
+---
+title: "HW Class 06: R Functions"
+author: "Parisa Charoensook A17939591"
+format: pdf
+editor: visual
+---
+
+## Overview
+
+This report contains a function that analyzes protein PDB data and plots the B-factors for a specified protein structure.
+
+
+### Questions
+> Q1: What type of object is returned from the read.pdb() function?
+
+This returns a PDB object, which is a list that contains information about the protein structure such as atoms, coordinates, and related structural data.
+
+>Q2: What does the trim.pdb() function do?
+
+The `trim.pdb()` function keeps only selected parts of a PDB structure like certain chains or atom types and removes the rest. 
+
+>Q3: What input parameter would turn off the marginal black and grey rectangles in the plots and what do they represent in this case?
+
+To turn off the marginal black and grey rectangles, use `sse = NULL`, or leaving out the `sse` argument. This would represent the secondary structure elements of the protein, such as alpha helices and beta sheets. 
+
+
+>Q4. What would be a better plot to compare across the different proteins? 
+
+A better plot would be a single combined plot with all three B- Factor trends shown together so the proteins can be compared directly. 
+
+>Q5. Which proteins are more similar to each other in their B-factor trends. How could you quantify this?
+
+1AKE and 4AKE are more similar to each other in their B-factor trends. This can be quantified by combining the B-factor values with `rbind()`, calculating distances using `dist()`, and using `hclust()`,  to create a dendrogram. The two proteins that cluster closest together are the most similar. 
+
+## Function documentation
+
+### Inputs
+The function takes one input called `pdb_id`, which is the PDB ID of a protein structure.
+
+### What the function does
+The function reads in the protein structure from the PDB, trims it to chain A and alpha carbons only, extracts the B-factors, and plots the B-factor values.
+
+### Output
+The function outputs a B-factor plot for the selected protein.
+
+## Code
+
+```{r}
+library(bio3d)
+
+plot_protein_bfactor <- function(pdb_id) {
+  
+  # Read in the PDB structure
+  protein <- read.pdb(pdb_id)
+  
+  # Keep only chain A and alpha carbons
+  chainA <- trim.pdb(protein, chain = "A", elety = "CA")
+  
+  # Extract B-factors
+  b_factors <- chainA$atom$b
+  
+  # Plot B-factors
+plotb3(b_factors, sse = chainA, typ = "l", ylab = "Bfactor", main = pdb_id)}
+
+```
+## Example Outputs
+
+```{r}
+plot_protein_bfactor("4AKE")
+plot_protein_bfactor("1AKE")
+plot_protein_bfactor("1E4Y")
+```
+
