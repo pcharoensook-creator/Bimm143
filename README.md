@@ -1,4 +1,7 @@
 # Bimm143
+theme: jekyll-theme-minimal
+title: Bimm143
+description: UCSD Bioinformatics classwork
 
 This repo is for my UCSD bioinformatics class.
 
